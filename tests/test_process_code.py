@@ -540,6 +540,16 @@ class TestModule:
         assert "pass" in module.source_code
 
 
+def test_get_file_reads_a_file_without_extension(testdir):
+    testdir.makefile("", script="print('measured')\n")
+    git_init()
+    git("add", "script")
+    git("commit", "-m", "Reasonable commit message")
+    module = SourceTree("").get_file("script")
+    assert module.ext == ""
+    assert "measured" in module.source_code
+
+
 def test_noncached_get_files_shas(testdir):
     git_init()
     testdir.makepyfile(test_file="def test(): pass")

@@ -90,7 +90,7 @@ class SourceTree:
                     self.cache[filename] = Module(
                         source_code=code,
                         mtime=fs_mtime,
-                        ext=filename.rsplit(".", 1)[1],
+                        ext=os.path.splitext(filename)[1][1:],
                         fs_fsha=fsha,
                         filename=filename,
                         rootdir=self.rootdir,
